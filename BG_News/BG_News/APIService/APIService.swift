@@ -14,10 +14,8 @@ class APIService {
 
     private init() { }
 
-    let URL_PATH = "https://newsapi.org/v2/top-headlines?country=in&apiKey=452d040207744964b395c0996a51174c"
-
-    func fetchNews<T: Codable>(completion: @escaping (Result<T, Error>) -> Void) {
-        guard let url = URL(string: URL_PATH) else {
+    func fetchNews<T: Codable>(path: String, completion: @escaping (Result<T, Error>) -> Void) {
+        guard let url = URL(string: path) else {
             print("URL is not valid")
             completion(.failure(APIError.urlNotValid))
             return

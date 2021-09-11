@@ -15,6 +15,20 @@ struct NewsDetailView: View {
     var body: some View {
         WebView(request: URLRequest(url: URL(string: url)!))
             .navigationBarTitle("News Detail", displayMode: .inline)
+            .navigationBarItems(trailing: Button(action: {
+                self.shareUrlButton()
+            }, label: {
+                Image(systemName: "square.and.arrow.up")
+            }))
+    }
+
+    func shareUrlButton() {
+        guard let url = URL(string: self.url) else { return }
+        let avc = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+
+        UIApplication.shared.windows.first?.rootViewController?.present(avc,
+                                                                        animated: true,
+                                                                        completion: nil)
     }
 }
 

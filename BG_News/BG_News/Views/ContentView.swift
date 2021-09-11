@@ -10,33 +10,14 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @State var articles: [News] = [News]()
-
     var body: some View {
-        ZStack {
-            NavigationView{
-                List {
-                    ForEach(articles, id: \.url) { news in
-                        NavigationLink(destination: NewsDetailView(url: news.url)) {
-                            NewsCardView(news: news)
-                        }
-                    }
-                }.onAppear(perform: fetchData)
-                    .navigationBarTitle("News", displayMode: .large)
-            }
-        }
-    }
 
-    func fetchData() {
-        APIService.shared.fetchNews { (result: Result<NewsResponse, Error>) in
-            switch result {
-            case .success(let articlesResponse):
-                articlesResponse.news.forEach { print(" -- \($0.title)") }
-                self.articles = articlesResponse.news
-            case .failure(let error):
-                print(error)
-            }
-        }
+        /// For Navigation Demo
+//        NavigationViewDemo()
+
+        /// For TabBar Demo
+        TabBarView()
+
     }
 }
 

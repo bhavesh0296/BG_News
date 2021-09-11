@@ -20,6 +20,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
+
+        newsURLSources.content = UserDefaults.standard.string(forKey: "content") ?? "top-headlines"
+        newsURLSources.source = UserDefaults.standard.string(forKey: "source") ?? "engadget"
+
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView().environmentObject(newsURLSources)
 

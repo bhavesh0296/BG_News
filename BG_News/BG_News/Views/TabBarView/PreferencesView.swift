@@ -44,11 +44,18 @@ struct PreferencesView: View {
                         .firstIndex(of: self.newsURLChoices.source) ?? 0
                 } else {
                     self.newsURLChoices.source = self.keys[self.newsSource]
+
+                    UserDefaults.standard.set(self.newsURLChoices.source, forKey: "source")
                 }
+
+                self.contentToDisplay = self.newsURLChoices.content == "top-headlines" ?
+                    0 : 1
             }
             .onDisappear {
                 self.newsURLChoices.content = self.contentToDisplay == 0 ?
                     self.newsURLChoices.displayContentType[0] : self.newsURLChoices.displayContentType[1]
+
+                UserDefaults.standard.set(self.newsURLChoices.content, forKey: "content")
             }
 
             .navigationBarTitle("Preferences", displayMode: .inline)
